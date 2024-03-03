@@ -11,12 +11,12 @@ const cartTotal = document.getElementById("total");
 const showHideCartSpan = document.getElementById("show-hide-cart");
 let isCartShowing = false;
 
-//Declare products
-const products = [];
+//Declare products using an array 
+const products = [
 {
     id: 1,
     productName: "Vanilla Cupcakes (6 Pack)",
-    image:""
+    images: "images/vanilla cupcake.webp",
     price: "12.99",
     category: "Cupcake",
   },
@@ -24,12 +24,14 @@ const products = [];
   {
     id: 2,
     productName: "French Macaron",
+    images: "./images/French macaroons.jpg",
     price: "3.99",
     category: "Macaron",
   },
   {
     id: 3,
     productName: "Pumpkin Cupcake",
+    images: ".images/pumkin cupckae.jpg",
     price: "3.99",
     category: "Cupcake"
   },
@@ -37,56 +39,65 @@ const products = [];
   {
     id: 4,
     productName: "Chocolate balls",
+    images:".images/chocolate balls.jpg",
     price: "5.99",
-    category: "Cupcake",
+    category: "Cupcake"
   },
   {
     id: 5,
     productName: "Chocolate Pretzels (4 Pack)",
+    images: "./images/chocolate pretzels.jpg",
     price: "10.99",
-    category: "Pretzel",
+    category: "Pretzel"
   },
   {
     id: 6,
     productName: "Strawberry Ice Cream",
+    images:".images/strawberry icecream.jpg",
     price: "2.99"   ,
-    category: "Ice Cream",
+    category: "Ice Cream"
   },
   {
     id: 7,
     productName: "Chocolate Macarons (4 Pack)",
+    images: ".images/chocolate macarons.jpg",
     price:"9.99",
-    category: "Macaron",
+    category: "Macaron"
   },
   {
     id: 8,
-    productName: "Strawberry Pretzel",
+    productName: "Strawberry Cheesecake",
+    images: ".images/strawberry cheesecake.jpg",
     price: "4.99",
-    category: "Pretzel",
+    category: "Tart"
   },
   {
     id: 9,
     productName: "Butter Pecan Ice Cream",
+    images: ".images/butter pecan ice cream.jpg",
     price: "2.99",
-    category: "Ice Cream",
+    category: "Ice Cream"
   },
   {
     id: 10,
     productName: "Chocolate Croissant",
+    images: ".images/chocolate croissant.jpg",
     price: "2.99",
-    category: "Croissant",
+    category: "Croissant"
   },
   {
     id: 11,
     productName: "Mocha Macarons (5 Pack)",
+    images:".images/mocha macarons.jpg",
     price: "11.99",
-    category: "Macaron",
+    category: "Macaron"
   },
   {
     id: 12,
     productName: "Fruit tarts (4 Pack)",
+    images: ".images/fruit tarts.jpg",
     price: 12.99,
-    category: "Tart",
+    category: "Tart"
   },
 ];
 
