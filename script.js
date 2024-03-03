@@ -118,4 +118,4 @@ addItem(id, products) {
 }
   
 //display new products added by user
-const 
+const currentProductcount = totalCountPerProduct[product.id];
