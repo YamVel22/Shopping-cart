@@ -10,6 +10,8 @@ const cartTotal = document.getElementById("total");
 const showHideCartSpan = document.getElementById("show-hide-cart");
 let isCartShowing = false;
 
+alert("Share your dessert moment");
+
 //Declare products using an array
 const products = [
   {
@@ -122,10 +124,12 @@ class ShoppingCart {
     this.total = 0;
   }
 
-  addItem(id, products) {
+  addItem(id, products, quantity) {
     const product = products.find((item) => item.id === id);
     const { productName, price } = product;
-    this.items.push(product);
+    for (let i = 0; i < quantity; i++) {
+      this.items.push(product);
+    }
 
     const totalCountPerProduct = {};
     this.items.forEach((dessert) => {
