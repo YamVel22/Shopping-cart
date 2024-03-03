@@ -16,7 +16,7 @@ const products = [];
 {
     id: 1,
     productName: "Vanilla Cupcakes (6 Pack)",
-    image: 
+    image:""
     price: "12.99",
     category: "Cupcake",
   },
@@ -31,11 +31,12 @@ const products = [];
     id: 3,
     productName: "Pumpkin Cupcake",
     price: "3.99",
-    category: "Cupcake",
+    category: "Cupcake"
   },
+
   {
     id: 4,
-    productName: "Chocolate Cupcake",
+    productName: "Chocolate balls",
     price: "5.99",
     category: "Cupcake",
   },
@@ -71,21 +72,21 @@ const products = [];
   },
   {
     id: 10,
-    productName: "Rocky Road Ice Cream",
+    productName: "Chocolate Croissant",
     price: "2.99",
-    category: "Ice Cream",
+    category: "Croissant",
   },
   {
     id: 11,
-    productName: "Vanilla Macarons (5 Pack)",
+    productName: "Mocha Macarons (5 Pack)",
     price: "11.99",
     category: "Macaron",
   },
   {
     id: 12,
-    productName: "Lemon Cupcakes (4 Pack)",
+    productName: "Fruit tarts (4 Pack)",
     price: 12.99,
-    category: "Cupcake",
+    category: "Tart",
   },
 ];
 
