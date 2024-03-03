@@ -119,3 +119,5 @@ addItem(id, products) {
   
 //display new products added by user
 const currentProductcount = totalCountPerProduct[product.id];
+const currentProductCountSpan = document.getElementById(`product-count-for-id${id}`);
+
