@@ -20,10 +20,11 @@
 }
 
 body {
-  background-color: var(--dark-grey);
+  background-color: var(--black);
 }
 
 .title {
+  font: ;
   color: var(--light-grey);
   text-align: center;
   margin: 25px 0;
