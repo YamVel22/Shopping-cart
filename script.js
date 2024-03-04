@@ -1,16 +1,16 @@
 //get elements from DOM
-const cartContainer = document.getElementById("cart-container");
-const productsContainer = document.getElementById("products-container");
-const dessertCards = document.getElementById("dessert-card-container");
-const cartBtn = document.getElementById("cart-btn");
-const clearCartBtn = document.getElementById("clear-cart-btn");
-const totalNumberOfItems = document.getElementById("total-items");
-const cartSubTotal = document.getElementById("subtotal");
-const cartTotal = document.getElementById("total");
-const showHideCartSpan = document.getElementById("show-hide-cart");
+const cartContainer = document.querySelector("#cart-container");
+const productsContainer = document.querySelector("#products-container");
+const dessertCards = document.querySelector("#dessert-card-container");
+const cartBtn = document.querySelector("#cart-btn");
+const clearCartBtn = document.querySelector("#clear-cart-btn");
+const totalNumberOfItems = document.querySelector("#total-items");
+const cartSubTotal = document.querySelector("#subtotal");
+const cartTotal = document.querySelector("#total");
+const showHideCartSpan = document.querySelector("#show-hide-cart");
 let isCartShowing = false;
 
-//Declare products using an array
+//declare products using an array 
 const products = [
   {
     id: 1,
@@ -19,7 +19,6 @@ const products = [
     price: "48.00",
     category: "Cupcake",
   },
-
   {
     id: 2,
     name: "French Macaron",
@@ -44,7 +43,7 @@ const products = [
   },
   {
     id: 5,
-    name: "Chocolate Pretzels (4 Pack)",
+    name: "Chocolate Pretzels",
     images: "./images/chocolate pretzels.jpg",
     price: "30.00",
     category: "Pretzel",
@@ -58,7 +57,7 @@ const products = [
   },
   {
     id: 7,
-    name: "Chocolate Macarons (4 Pack)",
+    name: "Chocolate Macarons",
     images: "./images/chocolate macarons.jpg",
     price: "95.00",
     category: "Macaron",
@@ -86,34 +85,33 @@ const products = [
   },
   {
     id: 11,
-    name: "Mocha Macarons (5 Pack)",
+    name: "Mocha Macarons",
     images: "./images/mocha macarons.jpg",
     price: "115.00",
     category: "Macaron",
   },
   {
     id: 12,
-    name: "Fruit tarts (4 Pack)",
+    name: "Fruit tarts",
     images: "./images/fruit tarts.jpg",
     price: "60.00",
     category: "Tart",
   },
 ];
 
-//display available products in HTML
 products.forEach(({ id, name, images, price, category }) => {
-  dessertCards.innerHTML += `
-      <div class="dessert-card">
-        <h2>${name}</h2>
-        <img src ="${images}">
-        <p class="dessert-price">R${price}</p>
-        <p class="product-category">Category: ${category}</p>
-        <button 
-          id="${id}" 
-          class="btn add-to-cart-btn">Add to cart
-        </button>
-      </div>
-    `;
+  const dessertCard = document.createElement("div");
+  dessertCard.className = "dessert-card";
+  dessertCard.innerHTML = `
+    <h2>${name}</h2>
+    <div class="product-image-container">
+      <img src="${images}" class="product-image" alt="${name}">
+    </div>
+    <p class="dessert-price">R${price}</p>
+    <p class="product-category">Category: ${category}</p>
+    <button id="${id}" class="btn add-to-cart-btn">Add to cart</button>
+  `;
+  dessertCards.appendChild(dessertCard);
 });
 
 class ShoppingCart {
@@ -122,41 +120,48 @@ class ShoppingCart {
     this.total = 0;
   }
 
-  addItem(id, products, quantity) {
+  addItem(id, products, quantity = 1) {
     const product = products.find((item) => item.id === id);
-    const { name, price } = product;
-    for (let i = 0; i < quantity; i++) {
-      this.items.push(product);
-    }
+    this.items.push({ ...product, quantity });
 
-    const totalCountPerProduct = {};
-    this.items.forEach((dessert) => {
-      totalCountPerProduct[dessert.id] =
-        (totalCountPerProduct[dessert.id] || 0) + 1;
-    });
-
-    //display new products added by user
-    const currentProductCount = totalCountPerProduct[id];
-    const currentProductCountSpan = document.getElementById(
-      `product-count-for-id${id}`
+    const totalCount = this.items.reduce(
+      (total, item) => total + item.quantity,
+      0
     );
+    totalNumberOfItems.textContent = totalCount;
 
-    if (currentProductCount > 1) {
-      currentProductCountSpan.textContent = `${currentProductCount}x`;
+    this.displayCartItem(product, totalCount);
+    this.calculateTotal();
+  }
+
+  displayCartItem(product, totalCount) {
+    const existingItem = document.getElementById(`dessert${product.id}`);
+    if (existingItem) {
+      existingItem.querySelector(
+        ".product-count"
+      ).textContent = `${totalCount}x`;
     } else {
-      productsContainer.innerHTML += `
-      <div id=dessert${id} class="product">
+      const newItem = document.createElement("div");
+      newItem.id = `dessert${product.id}`;
+      newItem.className = "product";
+      newItem.innerHTML = `
         <p>
-          <span class="product-count" id=product-count-for-id${id}></span>${name}
+          <span class="product-count">${totalCount}x</span>${product.name}
         </p>
-        <p>${price}</p>
-      </div>
-    `;
+        <p>${product.price}</p>
+      `;
+      productsContainer.appendChild(newItem);
     }
   }
 
-  getCounts() {
-    return this.items.length;
+  calculateTotal() {
+    const subTotal = this.items.reduce(
+      (total, item) => total + parseFloat(item.price) * item.quantity,
+      0
+    );
+    this.total = subTotal;
+    cartSubTotal.textContent = `R${subTotal.toFixed(2)}`;
+    cartTotal.textContent = `R${this.total.toFixed(2)}`;
   }
 
   clearCart() {
@@ -171,35 +176,20 @@ class ShoppingCart {
 
     if (isCartCleared) {
       this.items = [];
-      this.total = 0;
-      productsContainer.innerHTML = "";
       totalNumberOfItems.textContent = 0;
-      cartSubTotal.textContent = 0;
-      cartTotal.textContent = 0;
+      cartSubTotal.textContent = "R0.00";
+      cartTotal.textContent = "R0.00";
+      productsContainer.innerHTML = "";
     }
-  }
-
-  calculateTotal() {
-    const subTotal = this.items.reduce(
-      (total, item) => total + parseFloat(item.price),
-      0
-    );
-    this.total = subTotal;
-    cartSubTotal.textContent = `R${subTotal.toFixed(2)}`;
-    cartTotal.textContent = `R${this.total.toFixed(2)}`;
-    return this.total;
   }
 }
 
 const cart = new ShoppingCart();
-const addToCartBtns = document.getElementsByClassName("add-to-cart-btn");
 
-[...addToCartBtns].forEach((btn) => {
-  btn.addEventListener("click", (event) => {
+dessertCards.addEventListener("click", (event) => {
+  if (event.target.classList.contains("add-to-cart-btn")) {
     cart.addItem(Number(event.target.id), products);
-    totalNumberOfItems.textContent = cart.getCounts();
-    cart.calculateTotal();
-  });
+  }
 });
 
 cartBtn.addEventListener("click", () => {
@@ -207,4 +197,5 @@ cartBtn.addEventListener("click", () => {
   showHideCartSpan.textContent = isCartShowing ? "Hide" : "Show";
   cartContainer.style.display = isCartShowing ? "block" : "none";
 });
-clearCartBtn.addEventListener("click", cart.clearCart.bind(cart));
+
+clearCartBtn.addEventListener("click", () => cart.clearCart());
