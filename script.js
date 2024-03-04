@@ -10,7 +10,7 @@ const cartTotal = document.querySelector("#total");
 const showHideCartSpan = document.querySelector("#show-hide-cart");
 let isCartShowing = false;
 
-//declare products using an array 
+//declare the products using an array 
 const products = [
   {
     id: 1,
@@ -19,6 +19,7 @@ const products = [
     price: "48.00",
     category: "Cupcake",
   },
+
   {
     id: 2,
     name: "French Macaron",
@@ -43,7 +44,7 @@ const products = [
   },
   {
     id: 5,
-    name: "Chocolate Pretzels",
+    name: "Chocolate Pretzels (4 Pack)",
     images: "./images/chocolate pretzels.jpg",
     price: "30.00",
     category: "Pretzel",
@@ -57,7 +58,7 @@ const products = [
   },
   {
     id: 7,
-    name: "Chocolate Macarons",
+    name: "Chocolate Macarons (4 Pack)",
     images: "./images/chocolate macarons.jpg",
     price: "95.00",
     category: "Macaron",
@@ -85,14 +86,14 @@ const products = [
   },
   {
     id: 11,
-    name: "Mocha Macarons",
+    name: "Mocha Macarons (5 Pack)",
     images: "./images/mocha macarons.jpg",
     price: "115.00",
     category: "Macaron",
   },
   {
     id: 12,
-    name: "Fruit tarts",
+    name: "Fruit tarts (4 Pack)",
     images: "./images/fruit tarts.jpg",
     price: "60.00",
     category: "Tart",
@@ -134,6 +135,15 @@ class ShoppingCart {
     this.calculateTotal();
   }
 
+  removeItem(id) {
+    const index = this.items.findIndex((item) => item.id === id);
+    if (index !== -1) {
+      this.items.splice(index, 1);
+      this.calculateTotal();
+      this.updateCartDisplay();
+    }
+  }
+
   displayCartItem(product, totalCount) {
     const existingItem = document.getElementById(`dessert${product.id}`);
     if (existingItem) {
@@ -149,9 +159,32 @@ class ShoppingCart {
           <span class="product-count">${totalCount}x</span>${product.name}
         </p>
         <p>${product.price}</p>
+        <button class="btn remove-from-cart-btn" data-id="${product.id}">Remove</button>
       `;
       productsContainer.appendChild(newItem);
     }
+  }
+
+  updateCartDisplay() {
+    productsContainer.innerHTML = "";
+    const totalCount = this.items.reduce(
+      (total, item) => total + item.quantity,
+      0
+    );
+    totalNumberOfItems.textContent = totalCount;
+
+    this.items.forEach((item) => {
+      const newItem = document.createElement("div");
+      newItem.className = "product";
+      newItem.innerHTML = `
+        <p>
+          <span class="product-count">${item.quantity}x</span>${item.name}
+        </p>
+        <p>${item.price}</p>
+        <button class="btn remove-from-cart-btn" data-id="${item.id}">Remove</button>
+      `;
+      productsContainer.appendChild(newItem);
+    });
   }
 
   calculateTotal() {
@@ -189,6 +222,13 @@ const cart = new ShoppingCart();
 dessertCards.addEventListener("click", (event) => {
   if (event.target.classList.contains("add-to-cart-btn")) {
     cart.addItem(Number(event.target.id), products);
+  }
+});
+
+cartContainer.addEventListener("click", (event) => {
+  if (event.target.classList.contains("remove-from-cart-btn")) {
+    const itemId = Number(event.target.dataset.id);
+    cart.removeItem(itemId);
   }
 });
 
