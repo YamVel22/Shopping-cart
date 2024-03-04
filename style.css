@@ -43,6 +43,7 @@ body {
   text-align: center;
   border-radius: 15px;
   margin: 20px 10px;
+
 }
 
 .dessert-price {
@@ -54,7 +55,7 @@ body {
   cursor: pointer;
   width: 100px;
   color: var(--dark-grey);
-  background-color: var(--gold);
+  background-color: var(#752dff);
   background-image: linear-gradient(var(--golden-yellow), var(--orange));
   border-color: var(--gold);
   border-width: 3px;
@@ -88,6 +89,7 @@ body {
   font-size: 1.2rem;
   overflow-y: scroll;
 }
+
 
 .product {
   margin: 25px 0;

@@ -10,105 +10,103 @@ const cartTotal = document.getElementById("total");
 const showHideCartSpan = document.getElementById("show-hide-cart");
 let isCartShowing = false;
 
-alert("Share your dessert moment");
-
 //Declare products using an array
 const products = [
   {
     id: 1,
-    productName: "Vanilla Cupcakes (6 Pack)",
+    name: "Vanilla Cupcakes",
     images: "images/vanilla cupcake.webp",
-    price: "12.99",
+    price: "48.00",
     category: "Cupcake",
   },
 
   {
     id: 2,
-    productName: "French Macaron",
+    name: "French Macaron",
     images: "./images/French macaroons.jpg",
-    price: "3.99",
+    price: "23.00",
     category: "Macaron",
   },
   {
     id: 3,
-    productName: "Pumpkin Cupcake",
-    images: ".images/pumkin cupckae.jpg",
-    price: "3.99",
+    name: "Pumpkin Cupcake",
+    images: "./images/pumkin cupckae.jpg",
+    price: "15.00",
     category: "Cupcake",
   },
 
   {
     id: 4,
-    productName: "Chocolate balls",
-    images: ".images/chocolate balls.jpg",
-    price: "5.99",
+    name: "Chocolate balls",
+    images: "./images/chocolate balls.jpg",
+    price: "8.00",
     category: "Cupcake",
   },
   {
     id: 5,
-    productName: "Chocolate Pretzels (4 Pack)",
+    name: "Chocolate Pretzels (4 Pack)",
     images: "./images/chocolate pretzels.jpg",
-    price: "10.99",
+    price: "30.00",
     category: "Pretzel",
   },
   {
     id: 6,
-    productName: "Strawberry Ice Cream",
-    images: ".images/strawberry icecream.jpg",
-    price: "2.99",
+    name: "Strawberry Ice Cream",
+    images: "./images/strawberry icecream.jpg",
+    price: "17.00",
     category: "Ice Cream",
   },
   {
     id: 7,
-    productName: "Chocolate Macarons (4 Pack)",
-    images: ".images/chocolate macarons.jpg",
-    price: "9.99",
+    name: "Chocolate Macarons (4 Pack)",
+    images: "./images/chocolate macarons.jpg",
+    price: "95.00",
     category: "Macaron",
   },
   {
     id: 8,
-    productName: "Strawberry Cheesecake",
-    images: ".images/strawberry cheesecake.jpg",
-    price: "4.99",
+    name: "Strawberry Cheesecake",
+    images: "./images/strawberry cheesecake.jpg",
+    price: "44.00",
     category: "Tart",
   },
   {
     id: 9,
-    productName: "Butter Pecan Ice Cream",
-    images: ".images/butter pecan ice cream.jpg",
-    price: "2.99",
+    name: "Butter Pecan Ice Cream",
+    images: "./images/butter pecan ice cream.jpg",
+    price: "22.00",
     category: "Ice Cream",
   },
   {
     id: 10,
-    productName: "Chocolate Croissant",
-    images: ".images/chocolate croissant.jpg",
-    price: "2.99",
+    name: "Chocolate Croissant",
+    images: "./images/chocolate croissant.jpg",
+    price: "19.00",
     category: "Croissant",
   },
   {
     id: 11,
-    productName: "Mocha Macarons (5 Pack)",
-    images: ".images/mocha macarons.jpg",
-    price: "11.99",
+    name: "Mocha Macarons (5 Pack)",
+    images: "./images/mocha macarons.jpg",
+    price: "115.00",
     category: "Macaron",
   },
   {
     id: 12,
-    productName: "Fruit tarts (4 Pack)",
-    images: ".images/fruit tarts.jpg",
-    price: 12.99,
+    name: "Fruit tarts (4 Pack)",
+    images: "./images/fruit tarts.jpg",
+    price: "60.00",
     category: "Tart",
   },
 ];
 
 //display available products in HTML
-products.forEach(({ id, productName, images, price, category }) => {
+products.forEach(({ id, name, images, price, category }) => {
   dessertCards.innerHTML += `
       <div class="dessert-card">
-        <h2>${productName}</h2>
-        <img src ="${value.images}">
-        <p class="dessert-price">$${price}</p>
+        <h2>${name}</h2>
+        <img src ="${images}">
+        <p class="dessert-price">R${price}</p>
         <p class="product-category">Category: ${category}</p>
         <button 
           id="${id}" 
@@ -126,7 +124,7 @@ class ShoppingCart {
 
   addItem(id, products, quantity) {
     const product = products.find((item) => item.id === id);
-    const { productName, price } = product;
+    const { name, price } = product;
     for (let i = 0; i < quantity; i++) {
       this.items.push(product);
     }
@@ -149,7 +147,7 @@ class ShoppingCart {
       productsContainer.innerHTML += `
       <div id=dessert${id} class="product">
         <p>
-          <span class="product-count" id=product-count-for-id${id}></span>${productName}
+          <span class="product-count" id=product-count-for-id${id}></span>${name}
         </p>
         <p>${price}</p>
       </div>
@@ -187,8 +185,8 @@ class ShoppingCart {
       0
     );
     this.total = subTotal;
-    cartSubTotal.textContent = `$${subTotal.toFixed(2)}`;
-    cartTotal.textContent = `$${this.total.toFixed(2)}`;
+    cartSubTotal.textContent = `R${subTotal.toFixed(2)}`;
+    cartTotal.textContent = `R${this.total.toFixed(2)}`;
     return this.total;
   }
 }
