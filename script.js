@@ -86,14 +86,14 @@ const products = [
   },
   {
     id: 11,
-    name: "Mocha Macarons (5 Pack)",
+    name: "Mocha Macarons",
     images: "./images/mocha macarons.jpg",
     price: "115.00",
     category: "Macaron",
   },
   {
     id: 12,
-    name: "Fruit tarts (4 Pack)",
+    name: "Fruit tarts",
     images: "./images/fruit tarts.jpg",
     price: "60.00",
     category: "Tart",
