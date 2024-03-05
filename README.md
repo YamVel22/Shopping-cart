@@ -12,7 +12,7 @@ Installation
 
 Clone the repository: https://github.com/YamVel22/Shopping-cart.git
 
-Navigate to the project directory:
+Navigate to the project directory: https://yamvel22.github.io/Shopping-cart/
 
 Open the index.html file in your preferred web browser.
 Add items to the cart by entering the desired quantity and clicking the "Add to Cart" button.
