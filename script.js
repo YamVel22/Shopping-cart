@@ -10,7 +10,7 @@ const cartTotal = document.querySelector("#total");
 const showHideCartSpan = document.querySelector("#show-hide-cart");
 let isCartShowing = false;
 
-//declare the products using an array 
+//declare the products using an array
 const products = [
   {
     id: 1,
@@ -144,6 +144,7 @@ class ShoppingCart {
     }
   }
 
+  //Display cart added by user
   displayCartItem(product, totalCount) {
     const existingItem = document.getElementById(`dessert${product.id}`);
     if (existingItem) {
