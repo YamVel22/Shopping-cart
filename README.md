@@ -10,7 +10,7 @@ Interactive Testing: Ensure smooth functionality through testing in a web browse
 Debugging and Refinement: Address any issues and refine the code for efficiency.
 Installation
 
-Clone the repository:
+Clone the repository: https://github.com/YamVel22/Shopping-cart.git
 
 Navigate to the project directory:
 
